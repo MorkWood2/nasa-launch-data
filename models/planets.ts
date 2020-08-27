@@ -13,6 +13,19 @@ import * as _ from "https://deno.land/x/lodash@4.17.15-es/lodash.js";
 type Planet = Record<string, string>;
 
 let planets: Array<Planet>;
+//                              panets an array of aplanets
+export function filterHabitablePlanets(planets: Array<Planet>) {
+  return planets.filter((planet) => {
+    const plantaryRadius = Number(planet["koi_prad"]);
+    const stellarMass = Number(planet["koi_smass"]);
+    const stellarRadius = Number(planet["koi_srad"]);
+
+    return planet["koi_disposition"] === "CONFIRMED" &&
+      plantaryRadius > 0.5 && plantaryRadius < 1.5 &&
+      stellarMass > 0.78 && stellarMass < 1.04 &&
+      stellarRadius > 0.99 && stellarRadius < 1.01;
+  });
+}
 
 async function loadPlanetsData() {
   //           join('currentDIR', 'fileName')
@@ -28,17 +41,8 @@ async function loadPlanetsData() {
   //Deno.close to prevent memory leak
   Deno.close(file.rid);
 
-  //                    type assertion
-  const planets = (result as Array<Planet>).filter((planet) => {
-    const plantaryRadius = Number(planet["koi_prad"]);
-    const stellarMass = Number(planet["koi_smass"]);
-    const stellarRadius = Number(planet["koi_srad"]);
-
-    return planet["koi_disposition"] === "CONFIRMED" &&
-      plantaryRadius > 0.5 && plantaryRadius < 1.5 &&
-      stellarMass > 0.78 && stellarMass < 1.04 &&
-      stellarRadius > 0.99 && stellarRadius < 1.01;
-  });
+  //                  typescript type assertion
+  const planets = filterHabitablePlanets(result as Array<Planet>);
   //_.pick() lodash Creates an object composed of the picked object properties.
 
   return planets.map((planet) => {

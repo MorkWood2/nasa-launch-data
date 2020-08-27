@@ -21,6 +21,7 @@ function loadLaunches() {
 }
 
 function loadPlanets() {
+  // default get request from /planets endpoint from api.ts
   return fetch('/planets')
     .then((planetsResponse) => planetsResponse.json())
     .then((planets) => {

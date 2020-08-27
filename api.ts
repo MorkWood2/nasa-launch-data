@@ -7,7 +7,7 @@ const router = new Router();
 router.get("/", (ctx) => {
   ctx.response.body = "Hello world";
 });
-
+// '/planets' endpoint
 router.get("/planets", (ctx) => {
   ctx.response.body = planets.getAllPlanets();
 });
