@@ -7,7 +7,7 @@ import * as launches from "./models/launches.ts";
 const router = new Router();
 
 router.get("/", (ctx) => {
-  ctx.response.body = "Hello world";
+  ctx.response.body = "Nasa Api";
 });
 // '/planets' endpoint
 router.get("/planets", (ctx) => {
