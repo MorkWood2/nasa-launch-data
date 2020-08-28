@@ -1,9 +1,7 @@
-//module allows filePath to be read by windows and mac
-import { join } from "https://deno.land/std/path/mod.ts";
-// BufReader implements buffering for a Reader object
-import { BufReader } from "https://deno.land/std/io/bufio.ts";
+//log module allows filePath to be read by windows and mac
 //parse csv function
-import { parse } from "https://deno.land/std/encoding/csv.ts";
+// BufReader implements buffering for a Reader object
+import { log, join, parse, BufReader } from "../deps.ts";
 
 import * as _ from "https://deno.land/x/lodash@4.17.15-es/lodash.js";
 
@@ -59,7 +57,7 @@ async function loadPlanetsData() {
 
 planets = await loadPlanetsData();
 
-console.log(`${planets.length} habitable planets found!`);
+log.info(`${planets.length} habitable planets found!`);
 
 export function getAllPlanets() {
   return planets;
